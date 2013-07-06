@@ -1,0 +1,99 @@
+
+//
+// Mixins for SASS/SCSS
+// =================================================
+
+// Used to toggle browser prefixes, set to false if you don’t want them
+$prefixes: true;
+
+// Clearfix
+// The HTML5 Boilerplate version http://html5boilerplate.com
+@mixin clearfix {
+  *zoom: 1;
+  &:before,
+  &:after {
+    display: table;
+    content: " ";
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+// Placeholders
+// @include this inside of an input or textarea element
+// Not supported in all browsers
+@mixin placeholder($color: #999, $font-style: normal) {
+  &::-webkit-input-placeholder { color: $color; font-style: $font-style; } // WebKit browsers
+  &:-moz-placeholder { color: $color; font-style: $font-style; } // Mozilla Firefox 4 to 18
+  &::-moz-placeholder { color: $color; font-style: $font-style; } // Mozilla Firefox 19+
+  &:-ms-input-placeholder { color: $color; font-style: $font-style; } // Internet Explorer 10+
+}
+
+
+
+//
+// CSS3 Effects
+// =================================================
+
+// Border radius
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  @if $prefixes == true {
+    -webkit-border-radius: $radius;
+       -moz-border-radius: $radius;
+  }
+}
+
+@mixin box-shadow($shadows...) {
+  box-shadow: $shadows;
+  @if $prefixes == true {
+    -webkit-box-shadow: $shadows;
+       -moz-box-shadow: $shadows;
+  }
+}
+
+@mixin text-shadow($shadows...) {
+  text-shadow: $shadows;
+}
+
+@mixin border-box($box) {
+  box-sizing: $box;
+  @if $prefixes == true {
+    -webkit-box-shadow: $box;
+      -moz-box-shadow: $box;
+  }
+}
+
+
+
+//
+// Gradients
+// =================================================
+
+@mixin linear-gradient($start-color, $end-color, $orientation: vertical) {
+  @if $orientation == vertical {
+    $direction: top;
+    $reverse-direction: bottom;
+  }
+  @if $orientation == horizontal {
+    $direction: left;
+    $reverse-direction: right;
+  }
+
+  background-color: mix($start-color, $end-color, 50%);
+  background-image: -moz-linear-gradient($direction, $start-color, $end-color); // FF 3.6+
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from($start-color), to($end-color)); // Safari 4+, Chrome 2+
+  background-image: -webkit-linear-gradient($direction, $start-color, $end-color); // Safari 5.1+, Chrome 10+
+  background-image: -o-linear-gradient($direction, $start-color, $end-color); // Opera 11.10
+  background-image: linear-gradient(to $reverse-direction, $start-color, $end-color); // Standard, IE10
+  *filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#{ie-hex-str($start-color)}", endColorstr="#{ie-hex-str($end-color)}", GradientType=0); // IE9 and down
+}
+
+
+
+
+
+
+
+
